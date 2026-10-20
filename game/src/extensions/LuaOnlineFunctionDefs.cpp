@@ -4,6 +4,7 @@
 
 #include "LuaOnlineFunctionDefs.h"
 #include "lua.hpp"
+#include "online/OnlineLog.h"
 #include "online/OnlineSession.h"
 #include "pch.h"
 
@@ -133,10 +134,12 @@ static int CoopOnlineGetState(lua_State *L) {
     return 1;
 }
 
-// bool, string? CoopOnlineHost()
+// bool, string? CoopOnlineHost(bool openInviteDialog = false)
 static int CoopOnlineHost(lua_State *L) {
+    bool openInviteDialog = lua_toboolean(L, 1) != 0;
+
     std::string error;
-    bool success = OnlineSession::Instance().Host(error);
+    bool success = OnlineSession::Instance().Host(error, openInviteDialog);
     return PushResult(L, success, error);
 }
 
@@ -245,6 +248,16 @@ static int CoopOnlineGetFriendLobbies(lua_State *L) {
     return 1;
 }
 
+// CoopOnlineLog(string text)
+static int CoopOnlineLog(lua_State *L) {
+    if (lua_type(L, 1) != LUA_TSTRING) {
+        return luaL_error(L, "Argument 1 must be a string");
+    }
+
+    OnlineLog::Write("Script: %s", lua_tolstring(L, 1, nullptr));
+    return 0;
+}
+
 void LuaOnlineFunctionDefs::Load(lua_State *L) {
 #define REGISTER(fun) lua_register(L, #fun, fun)
 
@@ -257,6 +270,7 @@ void LuaOnlineFunctionDefs::Load(lua_State *L) {
     REGISTER(CoopOnlineSend);
     REGISTER(CoopOnlinePoll);
     REGISTER(CoopOnlineGetFriendLobbies);
+    REGISTER(CoopOnlineLog);
 
 #undef REGISTER
 }

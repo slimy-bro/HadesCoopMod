@@ -2,9 +2,6 @@
 -- Licensed under the MIT license. See LICENSE file in the project root for details.
 --
 
----@type HookUtils
-local HookUtils = ModRequire "../HookUtils.lua"
-
 -- Lua side of the online session (src/online/OnlineSession.cpp).
 -- The native code keeps the Steam lobby and the connection alive on its own thread,
 -- scripts read its events with Tick.
@@ -15,16 +12,17 @@ local CoopOnline = {}
 ---@type fun(event: table)[]
 CoopOnline.Listeners = {}
 
----@private
----@type fun()[]
-CoopOnline.TickListeners = {}
-
----@private
-CoopOnline.IsTickHooked = false
-
 ---@return boolean
 function CoopOnline.IsSupported()
     return CoopOnlineInit ~= nil
+end
+
+-- Writes to HadesCoopOnline.log
+---@param text string
+function CoopOnline.Log(text)
+    if CoopOnlineLog then
+        CoopOnlineLog(tostring(text))
+    end
 end
 
 -- Connects to Steam. Safe to call many times.
@@ -35,7 +33,6 @@ function CoopOnline.Init()
         return false, "HadesCoopGame.dll is outdated"
     end
 
-    CoopOnline.HookTick()
     return CoopOnlineInit()
 end
 
@@ -48,10 +45,11 @@ function CoopOnline.GetState()
     return CoopOnlineGetState()
 end
 
+---@param openInviteDialog boolean? open the Steam invite dialog once the lobby exists
 ---@return boolean success
 ---@return string? error
-function CoopOnline.Host()
-    return CoopOnlineHost()
+function CoopOnline.Host(openInviteDialog)
+    return CoopOnlineHost(openInviteDialog == true)
 end
 
 ---@param lobbyId string
@@ -94,29 +92,17 @@ function CoopOnline.AddListener(listener)
     table.insert(CoopOnline.Listeners, listener)
 end
 
----@param listener fun()
-function CoopOnline.AddTickListener(listener)
-    table.insert(CoopOnline.TickListeners, listener)
-end
-
----@param listener fun()
-function CoopOnline.RemoveTickListener(listener)
-    for index = #CoopOnline.TickListeners, 1, -1 do
-        if CoopOnline.TickListeners[index] == listener then
-            table.remove(CoopOnline.TickListeners, index)
-        end
-    end
-end
-
 ---@private
 function CoopOnline.Call(listener, ...)
     local success, err = pcall(listener, ...)
     if not success then
-        DebugPrint { Text = "CoopOnline: " .. tostring(err) }
+        CoopOnline.Log("Event listener failed: " .. tostring(err))
     end
 end
 
--- Passes queued network events to the listeners
+-- Passes queued network events to the listeners. Menus call it from their own handlers.
+-- It isn't hooked into the game's draw function: the native code keeps the connection alive without it,
+-- and menu screens should only change from the handlers the main menu API runs.
 function CoopOnline.Tick()
     if not CoopOnline.IsSupported() then
         return
@@ -127,21 +113,6 @@ function CoopOnline.Tick()
             CoopOnline.Call(listener, event)
         end
     end
-
-    for _, listener in ipairs({ table.unpack(CoopOnline.TickListeners) }) do
-        CoopOnline.Call(listener)
-    end
-end
-
--- The game calls draw every frame
----@private
-function CoopOnline.HookTick()
-    if CoopOnline.IsTickHooked or type(draw) ~= "function" then
-        return
-    end
-
-    CoopOnline.IsTickHooked = true
-    HookUtils.onPostFunction("draw", CoopOnline.Tick)
 end
 
 return CoopOnline

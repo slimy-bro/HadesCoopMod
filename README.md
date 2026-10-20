@@ -21,12 +21,16 @@ This version contains the first part: Steam lobbies, invites and the connection 
 
 ## What works now
 
-- Host a lobby from *Select gamemode* -> *Online Coop* and invite a friend through the Steam overlay (Shift+Tab).
+- Host a lobby from *Select gamemode* -> *Online Coop* -> *Host online game*.
+  The Steam invite window opens by itself once the lobby is ready. *Invite a friend* opens it again.
 - Join a friend: accept their invite in Steam, use *Join Game* in the Steam friends list,
   or press *Join <name>* in the Online Coop menu.
 - The games connect peer to peer through Steam (Steam relays the traffic when a direct connection isn't possible),
   check that both run a compatible version of the mod and show the ping.
 - Leaving the Online Coop screen closes the lobby.
+- The Online Coop screen doesn't update by itself yet. Press *Refresh* to see whether your friend has joined.
+  The connection itself runs in the background either way.
+- If you host and then accept a friend's invite, your empty lobby is closed and you join theirs.
 
 ## Spacewar (Steam AppID 480)
 
@@ -88,6 +92,8 @@ Attach it to bug reports.
 - *Steam is not available*: start Steam and log in. Epic Games Store players need `steam_api64.dll`, see above.
 - *Timed out*: a firewall may block Steam networking. Steam needs outgoing UDP traffic.
 - *Different version of the mod*: both players need the same release of the mod.
+- *The game freezes or the Online Coop screen doesn't open*: send `HadesCoopOnline.log`.
+  It records each step of opening the screen, so it shows where it stopped.
 
 ## Next steps
 

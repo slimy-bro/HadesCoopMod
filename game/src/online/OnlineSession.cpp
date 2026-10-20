@@ -282,6 +282,9 @@ bool OnlineSession::EnsureReady(std::string &error) {
 
     OnlineLog::Write("Steam is ready. AppID %u, user %llu, Steam was initialized by the %s", m_appId,
                      ToULL(m_localSteamId), m_ownsSteamInit ? "mod" : "game");
+    OnlineLog::Write("Steam overlay: %s, overlay library %s",
+                     m_utils->IsOverlayEnabled() ? "enabled" : "not enabled yet",
+                     GetModuleHandleW(L"GameOverlayRenderer64.dll") ? "loaded" : "not loaded");
 
     // Steam passes the lobby this way when a friend's invite starts the game
     uint64_t lobbyId = OnlineUtils::ParseConnectLobby(GetCommandLineA());
@@ -317,7 +320,7 @@ void OnlineSession::Shutdown() {
     OnlineLog::Write("Online session stopped");
 }
 
-bool OnlineSession::Host(std::string &error) {
+bool OnlineSession::Host(std::string &error, bool openInviteDialog) {
     if (!m_ready) {
         error = "Steam is not ready";
         return false;
@@ -330,6 +333,7 @@ bool OnlineSession::Host(std::string &error) {
             return false;
         }
         m_lobbyState = LobbyState::Creating;
+        m_openInviteOnCreate = openInviteDialog;
     }
 
     SteamAPICall_t apiCall = m_matchmaking->CreateLobby(k_ELobbyTypeFriendsOnly, static_cast<int>(MAX_PLAYERS));
@@ -389,6 +393,7 @@ bool OnlineSession::OpenInviteDialog() {
         lobbyId = m_lobbyId;
     }
 
+    OnlineLog::Write("Opening the Steam invite dialog");
     m_friends->ActivateGameOverlayInviteDialog(CSteamID(lobbyId));
     return true;
 }
@@ -412,6 +417,7 @@ void OnlineSession::LeaveLobby(const char *reason, bool notify) {
         m_lobbyState = LobbyState::Idle;
         m_lobbyId = 0;
         m_isHost = false;
+        m_openInviteOnCreate = false;
         m_peerSteamId = 0;
         m_peerName.clear();
         m_peerModVersion.clear();
@@ -594,6 +600,7 @@ void OnlineSession::EnterLobby(uint64_t lobbyId) {
     std::string peerName = peerId != 0 ? GetName(peerId) : "";
 
     bool stale = false;
+    bool openInviteDialog = false;
     {
         std::lock_guard lock(m_mutex);
         // Leave() could have run while Steam was being called
@@ -603,6 +610,8 @@ void OnlineSession::EnterLobby(uint64_t lobbyId) {
             m_lobbyState = LobbyState::InLobby;
             m_lobbyId = lobbyId;
             m_isHost = isHost;
+            openInviteDialog = isHost && m_openInviteOnCreate;
+            m_openInviteOnCreate = false;
 
             OnlineEvent event = MakeEvent(OnlineEventType::LobbyJoined);
             event.lobbyId = lobbyId;
@@ -625,22 +634,34 @@ void OnlineSession::EnterLobby(uint64_t lobbyId) {
         m_networking->AcceptP2PSessionWithUser(CSteamID(peerId));
 
     OnlineLog::Write("Entered lobby %llu as %s", ToULL(lobbyId), isHost ? "host" : "guest");
+
+    if (openInviteDialog) {
+        OnlineLog::Write("Opening the Steam invite dialog");
+        m_friends->ActivateGameOverlayInviteDialog(lobby);
+    }
 }
 
 void OnlineSession::HandleJoinRequest(uint64_t lobbyId, uint64_t friendId) {
     std::string friendName = GetName(friendId);
     OnlineLog::Write("Steam asks to join lobby %llu (via %s)", ToULL(lobbyId), friendName.c_str());
 
+    bool leaveOwnLobby = false;
     {
         std::lock_guard lock(m_mutex);
         if (m_lobbyState == LobbyState::InLobby && m_lobbyId == lobbyId)
             return;
 
-        if (m_lobbyState != LobbyState::Idle) {
+        // Nobody has joined our lobby yet, so it can be closed for the friend's game
+        if (m_lobbyState == LobbyState::InLobby && m_isHost && m_peerSteamId == 0) {
+            leaveOwnLobby = true;
+        } else if (m_lobbyState != LobbyState::Idle) {
             PushEventLocked(MakeEvent(OnlineEventType::InviteIgnored, friendId, friendName));
             return;
         }
     }
+
+    if (leaveOwnLobby)
+        LeaveLobby("JoiningFriend", false);
 
     std::string error;
     if (!Join(lobbyId, error))

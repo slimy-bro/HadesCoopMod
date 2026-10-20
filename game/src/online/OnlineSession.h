@@ -90,7 +90,8 @@ class OnlineSession {
     bool EnsureReady(std::string &error);
     void Shutdown();
 
-    bool Host(std::string &error);
+    // openInviteDialog: open the Steam invite dialog once the lobby exists
+    bool Host(std::string &error, bool openInviteDialog = false);
     bool Join(uint64_t lobbyId, std::string &error);
     bool OpenInviteDialog();
     void Leave();
@@ -166,6 +167,7 @@ class OnlineSession {
     LobbyState m_lobbyState = LobbyState::Idle;
     uint64_t m_lobbyId = 0;
     bool m_isHost = false;
+    bool m_openInviteOnCreate = false;
 
     uint64_t m_peerSteamId = 0;
     std::string m_peerName;

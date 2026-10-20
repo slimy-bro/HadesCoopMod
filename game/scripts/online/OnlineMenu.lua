@@ -9,19 +9,11 @@ local CoopOnline = ModRequire "CoopOnline.lua"
 local CHANNEL_CHECK_REQUEST = "TN_Coop:ChannelCheck"
 local CHANNEL_CHECK_REPLY = "TN_Coop:ChannelCheckReply"
 
--- The friend lobby scan asks Steam about every friend, don't run it every frame
-local FRIEND_LOBBIES_REFRESH_TICKS = 180
-local MENU_REFRESH_TICKS = 15
-
 local MenuState = {
     ---@type string?
     Notice = nil,
     GameChannelOk = false,
     FriendLobbies = {},
-    TicksUntilFriendsRefresh = 0,
-    TicksUntilMenuRefresh = 0,
-    ---@type fun()?
-    Refresh = nil,
 }
 
 ---@param key string
@@ -47,15 +39,7 @@ local function CleanName(name)
     return (string.gsub(name or "", "[{}@]", ""))
 end
 
----@param force boolean?
-local function UpdateFriendLobbies(force)
-    if not force and MenuState.TicksUntilFriendsRefresh > 0 then
-        MenuState.TicksUntilFriendsRefresh = MenuState.TicksUntilFriendsRefresh - 1
-        return
-    end
-
-    MenuState.TicksUntilFriendsRefresh = FRIEND_LOBBIES_REFRESH_TICKS
-
+local function UpdateFriendLobbies()
     local state = CoopOnline.GetState()
     if state.Ready and state.Lobby == "Idle" then
         MenuState.FriendLobbies = CoopOnline.GetFriendLobbies()
@@ -91,10 +75,8 @@ local function OnOnlineEvent(event)
         if event.Reason ~= "HostLeft" then
             MenuState.Notice = Format("OnlineMenu_Disconnected")
         end
-        UpdateFriendLobbies(true)
     elseif eventType == "LobbyJoinFailed" then
         MenuState.Notice = Format("OnlineMenu_JoinFailed", { Reason = event.Reason })
-        UpdateFriendLobbies(true)
     elseif eventType == "LobbyCreateFailed" then
         MenuState.Notice = Format("OnlineMenu_HostFailed", { Reason = event.Reason })
     elseif eventType == "VersionMismatch" then
@@ -105,10 +87,6 @@ local function OnOnlineEvent(event)
         })
     elseif eventType == "InviteIgnored" then
         MenuState.Notice = Format("OnlineMenu_InviteIgnored", { Name = CleanName(event.Name) })
-    end
-
-    if MenuState.Refresh then
-        MenuState.Refresh()
     end
 end
 
@@ -133,12 +111,12 @@ end
 local function Retry()
     MenuState.Notice = nil
     CoopOnline.Init()
-    UpdateFriendLobbies(true)
 end
 
 local function Host()
     MenuState.Notice = nil
-    local success, err = CoopOnline.Host()
+    -- Steam opens the invite dialog as soon as the lobby exists
+    local success, err = CoopOnline.Host(true)
     ShowError(success, err, "OnlineMenu_HostFailed")
 end
 
@@ -146,7 +124,6 @@ local function Leave()
     MenuState.Notice = nil
     MenuState.GameChannelOk = false
     CoopOnline.Leave()
-    UpdateFriendLobbies(true)
 end
 
 local function Invite()
@@ -161,10 +138,8 @@ local function CheckGameChannel()
     end
 end
 
-local function Refresh()
-    UpdateFriendLobbies(true)
-    CheckGameChannel()
-end
+-- The menu doesn't update by itself, every button reads the latest state
+local function Refresh() end
 
 -- Returns the message lines and the button actions for the current session state
 local function GetMenuModel()
@@ -246,23 +221,32 @@ local function GetMenuModel()
     return lines, primary, secondary
 end
 
+-- The screen is built like the local coop menu: components get localization keys first,
+-- then the definitions are loaded. SetText is only used after that.
+-- The main menu API runs these handlers in pcall and drops errors, a failing handler leaves
+-- a half built screen behind. Errors go to the screen and to HadesCoopOnline.log instead.
 MainMenuAPIAddGamemode("Online Coop", function()
+    CoopOnline.Log("Opening the Online Coop menu")
+
     local menu = CreateMenuScreen()
     menu:CreateBack(0.8)
     menu:CreateBackground("")
     menu:CreateTitleText()
     menu:SetLowerInputBlock(true)
 
-    local message = CreateGUIComponentTextBox(menu)
-    menu:AddReflection("mMessageText", message)
-
-    local primaryButton = CreateGUIComponentButton(menu)
-    menu:AddReflection("mPrimaryButton", primaryButton)
-
-    local secondaryButton = CreateGUIComponentButton(menu)
-    menu:AddReflection("mSecondaryButton", secondaryButton)
-
+    local message, primaryButton, secondaryButton
     local primaryAction, secondaryAction
+
+    ---@param fun fun()
+    local function Run(fun)
+        local success, err = pcall(fun)
+        if not success then
+            CoopOnline.Log("Online Coop menu error: " .. tostring(err))
+            pcall(function()
+                message:SetText(tostring(err))
+            end)
+        end
+    end
 
     local function SetButtonText(button, action)
         if action.Params then
@@ -273,6 +257,10 @@ MainMenuAPIAddGamemode("Online Coop", function()
     end
 
     local function RefreshMenu()
+        CoopOnline.Tick()
+        UpdateFriendLobbies()
+        CheckGameChannel()
+
         local lines
         lines, primaryAction, secondaryAction = GetMenuModel()
         message:SetText(table.concat(lines, "\n"))
@@ -280,55 +268,55 @@ MainMenuAPIAddGamemode("Online Coop", function()
         SetButtonText(secondaryButton, secondaryAction)
     end
 
-    -- Keeps the menu up to date when the game ticks while the menu is open
-    local function OnTick()
-        UpdateFriendLobbies()
-        MenuState.TicksUntilMenuRefresh = MenuState.TicksUntilMenuRefresh - 1
-        if MenuState.TicksUntilMenuRefresh <= 0 then
-            MenuState.TicksUntilMenuRefresh = MENU_REFRESH_TICKS
-            RefreshMenu()
-        end
-    end
-
     -- Buttons do what their text said when they were pressed
     local function Activate(action)
-        CoopOnline.Tick()
-        if action then
-            action.Handler()
-        end
-        CoopOnline.Tick()
-        RefreshMenu()
+        Run(function()
+            CoopOnline.Tick()
+            if action then
+                action.Handler()
+            end
+        end)
+        Run(RefreshMenu)
     end
-
-    primaryButton:AddActivationHandler(function()
-        Activate(primaryAction)
-    end)
-
-    secondaryButton:AddActivationHandler(function()
-        Activate(secondaryAction)
-    end)
 
     -- There is no online game yet, so the lobby lives as long as this screen
     menu:CreateCancelButton(function()
-        CoopOnline.RemoveTickListener(OnTick)
-        MenuState.Refresh = nil
-        CoopOnline.Leave()
+        Run(CoopOnline.Leave)
         menu:ExitScreen()
+        CoopOnline.Log("Closed the Online Coop menu")
     end)
+
+    message = CreateGUIComponentTextBox(menu)
+    primaryButton = CreateGUIComponentButton(menu)
+    secondaryButton = CreateGUIComponentButton(menu)
+
+    message:SetTextLocalizationKey("OnlineMenu_Idle")
+    menu:AddReflection("mMessageText", message)
+
+    primaryButton:SetTextLocalizationKey("OnlineMenu_Host")
+    primaryButton:AddActivationHandler(function()
+        Activate(primaryAction)
+    end)
+    menu:AddReflection("mPrimaryButton", primaryButton)
+
+    secondaryButton:SetTextLocalizationKey("OnlineMenu_Refresh")
+    secondaryButton:AddActivationHandler(function()
+        Activate(secondaryAction)
+    end)
+    menu:AddReflection("mSecondaryButton", secondaryButton)
+
+    menu:LoadDefenitions("../Mods/TN_CoopMod/OnlineMenuScreen.sjson")
+    CoopOnline.Log("The Online Coop menu is loaded")
 
     MenuState.Notice = nil
     MenuState.GameChannelOk = false
-    MenuState.Refresh = RefreshMenu
-    CoopOnline.AddTickListener(OnTick)
 
-    CoopOnline.Init()
-    -- Events that came while the menu was closed, e.g. a Steam invite accepted from the main menu
-    CoopOnline.Tick()
-    CheckGameChannel()
-    UpdateFriendLobbies(true)
-    RefreshMenu()
-
-    menu:LoadDefenitions("../Mods/TN_CoopMod/OnlineMenuScreen.sjson")
+    Run(function()
+        local success, err = CoopOnline.Init()
+        CoopOnline.Log(success and "Steam is ready for the menu" or "Steam is not available: " .. tostring(err))
+    end)
+    -- Also shows events that came while the menu was closed, e.g. a Steam invite accepted from the main menu
+    Run(RefreshMenu)
 end)
 
 -- Connect to Steam once the main menu is up. Steam invites work without opening the Online Coop menu then,
