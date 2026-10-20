@@ -1,6 +1,13 @@
 
 # Hades coop mod
 
+> **Disclosure: the online co-op part of this fork is fully vibecoded.**
+> It was written entirely by AI and hasn't been reviewed by the original creator. Expect bugs.
+>
+> The local co-op mod it's built on is the work of Uladzislau 'TheNormalnij' Nikalayevich
+> ([original repository](https://github.com/TheNormalnij/HadesCoopMod)).
+> If you want to support the mod, please support the original creator: [thenormalnij.de/donate](https://thenormalnij.de/donate).
+
 Play Hades with a friend!
 This mod adds local cooperative multiplayer to Hades, allowing two players to fight through the Underworld together on the same PC.
 
@@ -137,6 +144,8 @@ ModRequire "dev/game/scripts/init.lua"
 ```
 5. Now you can make changes directly in the repository and load them in the game.
 
-# Suppoort
+# Support
 
-You can support development using crypto. See [my page](https://thenormalnij.de/donate) for details
+This mod was created by Uladzislau 'TheNormalnij' Nikalayevich. The online co-op part of this fork is vibecoded.
+If you want to support the mod, support the original creator. Donations are in crypto, see
+[the creator's page](https://thenormalnij.de/donate) for details.
