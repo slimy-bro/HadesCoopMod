@@ -330,3 +330,12 @@ MainMenuAPIAddGamemode("Online Coop", function()
 
     menu:LoadDefenitions("../Mods/TN_CoopMod/OnlineMenuScreen.sjson")
 end)
+
+-- Connect to Steam once the main menu is up. Steam invites work without opening the Online Coop menu then,
+-- and a game started by an invite joins the lobby.
+OnMenuOpened {
+    "MainMenuScreen",
+    function()
+        CoopOnline.Init()
+    end
+}

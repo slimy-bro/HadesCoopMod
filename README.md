@@ -31,20 +31,40 @@ This version contains the first part: Steam lobbies, invites and the connection 
 ## Spacewar (Steam AppID 480)
 
 Online mode runs through Spacewar, Valve's public Steamworks test app, so players don't need a shared game AppID.
-This is set by `Online.SteamAppId` in `config.lua` and is on by default:
 
-- Steam shows you as playing Spacewar while the mod is installed.
+- Steam shows you as playing Spacewar.
 - Hades achievements don't unlock while Spacewar is active.
 - Hades keeps its saves in `Documents/Saved Games/Hades`, they should not be affected.
   Back them up before you try online mode for the first time anyway.
-- Set `SteamAppId = 0` to turn it off. Steam players can still play online then, through the game's own AppID.
 
 The Online Coop menu shows the AppID in use. Both players need the same AppID.
 
-The mod switches the AppID when the game starts, before the game connects to Steam.
+### Start Hades as Spacewar (recommended)
+
+`HadesCoopLauncher.exe` in the mod folder makes Steam start Hades whenever Spacewar starts.
+Steam then runs the game as Spacewar from the start, and accepting an invite starts Hades instead of Spacewar.
+Set it up once:
+
+1. Add Spacewar to your library: open `steam://install/480` in a browser or in the Windows Run dialog (Win+R).
+   It is free and small. Its own game never runs.
+2. In Steam, right click Spacewar -> *Properties* -> *General* -> *Launch Options*, and enter
+   the full path of `HadesCoopLauncher.exe` in your mod folder followed by `%command%`, for example:
+   ```
+   "C:\Program Files (x86)\Steam\steamapps\common\Hades\Content\Mods\TN_CoopMod\HadesCoopLauncher.exe" %command%
+   ```
+   Add `--vulkan` before `%command%` to start the Vulkan version of the game.
+   If the launcher isn't inside the Hades folder, add `--game "C:\...\Hades\x64\Hades.exe"` before `%command%`.
+3. Press *Play* on Spacewar to start Hades with the mod.
+
+### Without the launcher
+
+When Hades is started normally, the mod switches the AppID during startup, before the game connects to Steam.
+This is set by `Online.SteamAppId` in `config.lua` and is on by default, so Steam shows you as playing Spacewar
+whenever the mod is installed. Set `SteamAppId = 0` to turn it off.
+Steam players can still play online then, through the game's own AppID.
+
 If the menu shows a different AppID with a warning, the game connected to Steam before the mod was loaded.
-In that case create `steam_appid.txt` with the text `480` next to `Hades.exe` (`Hades/x64` or `Hades/x64Vk`)
-and start `Hades.exe` directly instead of starting it from Steam.
+Use the launcher in that case.
 
 If Steam restarts the game during launch because of the AppID change, the mod doesn't change the AppID
 on the next launch and notes it in the log.
@@ -54,14 +74,16 @@ on the next launch and notes it in the log.
 - Both players use the same version of the mod, and Steam is running with them logged in.
 - Epic Games Store version: copy `steam_api64.dll` next to `HadesCoopGame.dll`.
   It ships with the [Steamworks SDK](https://partner.steamgames.com/downloads/list) (`redistributable_bin/win64`)
-  and with many Steam games. The Steam overlay may not work in this version.
-  Your friend can join you from their Online Coop menu or their Steam friends list instead.
+  and with many Steam games. Start the game with the launcher, otherwise the Steam overlay may not work.
+  Your friend can also join you from their Online Coop menu or their Steam friends list.
 
 ## Invites
 
-Start Hades with the mod before you accept an invite.
-With Spacewar, Steam can't start Hades from an invite and would try to start Spacewar instead.
-Accepting an invite while the game is running joins the lobby, even outside of the Online Coop menu.
+The mod connects to Steam when the main menu opens, so you can accept an invite from anywhere in the game.
+The game joins the lobby, open the Online Coop menu to see the connection.
+
+With the launcher, accepting an invite while the game is closed starts Hades and joins the lobby.
+Without it, start Hades first, otherwise Steam starts Spacewar.
 
 ## Troubleshooting
 

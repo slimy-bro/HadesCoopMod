@@ -13,8 +13,9 @@ add_subdirectory(libs/EASTL-forge1.51)
 add_subdirectory(libs/lua-5.2.2)
 
 add_subdirectory(game)
+add_subdirectory(launcher)
 
-install(TARGETS HadesCoopGame
+install(TARGETS HadesCoopGame HadesCoopLauncher
         RUNTIME
         DESTINATION ${CMAKE_SOURCE_DIR}/bin
 )

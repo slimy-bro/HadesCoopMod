@@ -36,6 +36,8 @@ constexpr uint64_t SESSION_STATE_INTERVAL_US = 2 * SECOND_US;
 constexpr uint64_t CONNECTION_TIMEOUT_US = 10 * SECOND_US;
 constexpr uint64_t MAX_PING_AGE_US = 30 * SECOND_US;
 constexpr auto NET_THREAD_INTERVAL = std::chrono::milliseconds(5);
+// Without a peer the thread only pumps Steam callbacks
+constexpr auto NET_THREAD_IDLE_INTERVAL = std::chrono::milliseconds(50);
 
 constexpr size_t MAX_QUEUED_EVENTS = 4096;
 constexpr int MAX_PACKETS_PER_UPDATE = 256;
@@ -168,6 +170,13 @@ void OnlineSession::PrepareEarly() {
     m_modDirectory = OnlineUtils::GetModuleDirectory();
     OnlineLog::Open(m_modDirectory + L"HadesCoopOnline.log");
     OnlineLog::Write("Hades coop mod %s, online protocol %u", HADES_COOP_VERSION, PROTOCOL_VERSION);
+
+    // HadesCoopLauncher and Steam set it when the game starts as Spacewar
+    char startupAppId[32] = {};
+    const char *startupAppIdText =
+        GetEnvironmentVariableA("SteamAppId", startupAppId, sizeof(startupAppId)) ? startupAppId : "not set";
+    OnlineLog::Write("Started with SteamAppId %s%s", startupAppIdText,
+                     OnlineUtils::ParseConnectLobby(GetCommandLineA()) != 0 ? ", from a lobby invite" : "");
 
     m_desiredAppId = OnlineUtils::ReadConfigNumber(m_modDirectory + L"config.lua", "SteamAppId", DEFAULT_APP_ID);
 
@@ -695,10 +704,19 @@ void OnlineSession::NetThreadMain() {
         if (m_ownsSteamInit)
             m_steam.RunCallbacks();
 
-        ReceivePackets(buffer);
-        UpdateConnection();
+        bool hasPeer;
+        {
+            std::lock_guard lock(m_mutex);
+            hasPeer = m_peerSteamId != 0;
+        }
 
-        std::this_thread::sleep_for(NET_THREAD_INTERVAL);
+        // Steam keeps packets queued until there is a peer to read them for
+        if (hasPeer) {
+            ReceivePackets(buffer);
+            UpdateConnection();
+        }
+
+        std::this_thread::sleep_for(hasPeer ? NET_THREAD_INTERVAL : NET_THREAD_IDLE_INTERVAL);
     }
 }
 
