@@ -17,5 +17,7 @@ target_sources(
         ${MOD_FILES}
 )
 
+target_compile_definitions(HadesCoopGame PRIVATE HADES_COOP_VERSION="${HadesCoop_VERSION}")
+
 target_link_libraries(HadesCoopGame PRIVATE liblua)
 target_precompile_headers(HadesCoopGame PRIVATE src/pch.h)

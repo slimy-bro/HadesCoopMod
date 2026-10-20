@@ -5,6 +5,7 @@
 
 -- Load menu and add gamemode button
 ModRequire "CoopMenu.lua"
+ModRequire "online/OnlineMenu.lua"
 
 -- Get current gamemode
 local _, data = GetTempRuntimeData("Gamemode")

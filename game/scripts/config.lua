@@ -53,6 +53,17 @@ local Config = {
         Font = "AlegreyaSansSCRegular",
         Justification = "Center"
     },
+    -- Online co-op through Steam (in development, see README)
+    Online = {
+        -- Steam AppID the game reports to Steam while the mod is installed.
+        -- 480 is Spacewar, Valve's public test app. Online lobbies, invites and networking go through it,
+        -- so Steam and Epic Games Store players can play together.
+        -- While it is active Steam shows you as playing Spacewar and Hades achievements don't unlock.
+        -- Set to 0 to keep the game's own AppID. Steam players can still play online then,
+        -- but both players must use the same AppID.
+        -- The mod reads this value when the game starts, restart the game after changing it.
+        SteamAppId = 480,
+    },
     Debug = {
         OneHit = false,
         P1GodMode = false,

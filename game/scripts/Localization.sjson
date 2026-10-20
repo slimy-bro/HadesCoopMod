@@ -42,6 +42,122 @@
                 {
                 Id = "CoopMenu_PlayerController"
                 DisplayName = "Player $PlayerIndex: $Controller"
+                },
+                {
+                Id = "OnlineMenu_Header"
+                DisplayName = "Online Co-op"
+                },
+                {
+                Id = "OnlineMenu_SteamUnavailable"
+                DisplayName = "Steam is not available: $Error"
+                },
+                {
+                Id = "OnlineMenu_Idle"
+                DisplayName = "Host a game, then invite a friend through the Steam overlay (Shift+Tab). To join a friend, accept their invite in Steam or pick them below."
+                },
+                {
+                Id = "OnlineMenu_FriendsHosting"
+                DisplayName = "Friends hosting: $Names"
+                },
+                {
+                Id = "OnlineMenu_Creating"
+                DisplayName = "Creating a lobby..."
+                },
+                {
+                Id = "OnlineMenu_Joining"
+                DisplayName = "Joining the lobby..."
+                },
+                {
+                Id = "OnlineMenu_Waiting"
+                DisplayName = "Your lobby is open. Invite a friend through the Steam overlay. Friends can also join you from their Online Co-op menu or their Steam friends list. Leaving this screen closes the lobby."
+                },
+                {
+                Id = "OnlineMenu_NoOverlay"
+                DisplayName = "The Steam overlay is not available in this game. Your friend can still join you from their Online Co-op menu."
+                },
+                {
+                Id = "OnlineMenu_Connecting"
+                DisplayName = "Connecting to $Name..."
+                },
+                {
+                Id = "OnlineMenu_Connected"
+                DisplayName = "Connected to $Name. Ping: $Ping ms."
+                },
+                {
+                Id = "OnlineMenu_ChannelOk"
+                DisplayName = "Game data channel: working."
+                },
+                {
+                Id = "OnlineMenu_ChannelWaiting"
+                DisplayName = "Game data channel: waiting for $Name..."
+                },
+                {
+                Id = "OnlineMenu_NotPlayableYet"
+                DisplayName = "Online gameplay is not ready yet. This version tests the connection between your games."
+                },
+                {
+                Id = "OnlineMenu_VersionMismatch"
+                DisplayName = "$Name has a different version of the mod. Yours: $Mine. Theirs: $Theirs."
+                },
+                {
+                Id = "OnlineMenu_PeerLeft"
+                DisplayName = "$Name left the lobby."
+                },
+                {
+                Id = "OnlineMenu_ConnectionLost"
+                DisplayName = "Lost connection to $Name: $Reason"
+                },
+                {
+                Id = "OnlineMenu_Disconnected"
+                DisplayName = "You were disconnected from the lobby."
+                },
+                {
+                Id = "OnlineMenu_JoinFailed"
+                DisplayName = "Could not join the lobby: $Reason"
+                },
+                {
+                Id = "OnlineMenu_HostFailed"
+                DisplayName = "Could not create a lobby: $Reason"
+                },
+                {
+                Id = "OnlineMenu_InviteIgnored"
+                DisplayName = "$Name invited you, but you are already in a lobby. Leave it first."
+                },
+                {
+                Id = "OnlineMenu_AppId"
+                DisplayName = "Steam AppID: $AppId"
+                },
+                {
+                Id = "OnlineMenu_AppIdMismatch"
+                DisplayName = "The mod expected AppID $Expected. Both players need the same AppID, see the README."
+                },
+                {
+                Id = "OnlineMenu_Host"
+                DisplayName = "Host online game"
+                },
+                {
+                Id = "OnlineMenu_Invite"
+                DisplayName = "Invite a friend"
+                },
+                {
+                Id = "OnlineMenu_Leave"
+                DisplayName = "Leave lobby"
+                },
+                {
+                Id = "OnlineMenu_Cancel"
+                DisplayName = "Cancel"
+                },
+                {
+                Id = "OnlineMenu_Refresh"
+                DisplayName = "Refresh"
+                },
+                {
+                Id = "OnlineMenu_Retry"
+                DisplayName = "Retry"
+                },
+                {
+                Id = "OnlineMenu_JoinFriend"
+                DisplayName = "Join $Name"
                 }
             ]
         },
@@ -87,6 +203,122 @@
                 {
                 Id = "CoopMenu_PlayerController"
                 DisplayName = "Игрок $PlayerIndex: $Controller"
+                },
+                {
+                Id = "OnlineMenu_Header"
+                DisplayName = "Игра по сети"
+                },
+                {
+                Id = "OnlineMenu_SteamUnavailable"
+                DisplayName = "Steam недоступен: $Error"
+                },
+                {
+                Id = "OnlineMenu_Idle"
+                DisplayName = "Создайте игру и пригласите друга через оверлей Steam (Shift+Tab). Чтобы присоединиться к другу, примите его приглашение в Steam или выберите его ниже."
+                },
+                {
+                Id = "OnlineMenu_FriendsHosting"
+                DisplayName = "Друзья создали игру: $Names"
+                },
+                {
+                Id = "OnlineMenu_Creating"
+                DisplayName = "Создание лобби..."
+                },
+                {
+                Id = "OnlineMenu_Joining"
+                DisplayName = "Подключение к лобби..."
+                },
+                {
+                Id = "OnlineMenu_Waiting"
+                DisplayName = "Лобби открыто. Пригласите друга через оверлей Steam. Друзья также могут присоединиться через меню «Игра по сети» или список друзей Steam. Если закрыть этот экран, лобби закроется."
+                },
+                {
+                Id = "OnlineMenu_NoOverlay"
+                DisplayName = "Оверлей Steam недоступен в этой игре. Друг всё равно может присоединиться через своё меню «Игра по сети»."
+                },
+                {
+                Id = "OnlineMenu_Connecting"
+                DisplayName = "Подключение к $Name..."
+                },
+                {
+                Id = "OnlineMenu_Connected"
+                DisplayName = "Подключено к $Name. Пинг: $Ping мс."
+                },
+                {
+                Id = "OnlineMenu_ChannelOk"
+                DisplayName = "Канал игровых данных: работает."
+                },
+                {
+                Id = "OnlineMenu_ChannelWaiting"
+                DisplayName = "Канал игровых данных: ожидание $Name..."
+                },
+                {
+                Id = "OnlineMenu_NotPlayableYet"
+                DisplayName = "Сетевая игра ещё не готова. Эта версия проверяет соединение между вашими играми."
+                },
+                {
+                Id = "OnlineMenu_VersionMismatch"
+                DisplayName = "У $Name другая версия мода. Ваша: $Mine. Версия друга: $Theirs."
+                },
+                {
+                Id = "OnlineMenu_PeerLeft"
+                DisplayName = "Игрок $Name покинул лобби."
+                },
+                {
+                Id = "OnlineMenu_ConnectionLost"
+                DisplayName = "Потеряно соединение с $Name: $Reason"
+                },
+                {
+                Id = "OnlineMenu_Disconnected"
+                DisplayName = "Вы отключены от лобби."
+                },
+                {
+                Id = "OnlineMenu_JoinFailed"
+                DisplayName = "Не удалось присоединиться к лобби: $Reason"
+                },
+                {
+                Id = "OnlineMenu_HostFailed"
+                DisplayName = "Не удалось создать лобби: $Reason"
+                },
+                {
+                Id = "OnlineMenu_InviteIgnored"
+                DisplayName = "Игрок $Name пригласил вас, но вы уже в лобби. Сначала выйдите из него."
+                },
+                {
+                Id = "OnlineMenu_AppId"
+                DisplayName = "Steam AppID: $AppId"
+                },
+                {
+                Id = "OnlineMenu_AppIdMismatch"
+                DisplayName = "Мод ожидал AppID $Expected. У обоих игроков должен быть одинаковый AppID, см. README."
+                },
+                {
+                Id = "OnlineMenu_Host"
+                DisplayName = "Создать сетевую игру"
+                },
+                {
+                Id = "OnlineMenu_Invite"
+                DisplayName = "Пригласить друга"
+                },
+                {
+                Id = "OnlineMenu_Leave"
+                DisplayName = "Покинуть лобби"
+                },
+                {
+                Id = "OnlineMenu_Cancel"
+                DisplayName = "Отмена"
+                },
+                {
+                Id = "OnlineMenu_Refresh"
+                DisplayName = "Обновить"
+                },
+                {
+                Id = "OnlineMenu_Retry"
+                DisplayName = "Повторить"
+                },
+                {
+                Id = "OnlineMenu_JoinFriend"
+                DisplayName = "Присоединиться к $Name"
                 }
             ]
         },
@@ -132,6 +364,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "Spieler $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "Online-Koop"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "Steam ist nicht verfügbar: $Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "Erstelle ein Spiel und lade einen Freund über das Steam-Overlay ein (Umschalt+Tab). Um einem Freund beizutreten, nimm seine Einladung in Steam an oder wähle ihn unten aus."
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "Freunde mit offenem Spiel: $Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "Lobby wird erstellt..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "Trete der Lobby bei..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "Deine Lobby ist offen. Lade einen Freund über das Steam-Overlay ein. Freunde können auch über ihr Online-Koop-Menü oder ihre Steam-Freundesliste beitreten. Wenn du diesen Bildschirm verlässt, wird die Lobby geschlossen."
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "Das Steam-Overlay ist in diesem Spiel nicht verfügbar. Dein Freund kann trotzdem über sein Online-Koop-Menü beitreten."
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "Verbinde mit $Name..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "Verbunden mit $Name. Ping: $Ping ms."
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "Spieldatenkanal: funktioniert."
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "Spieldatenkanal: warte auf $Name..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "Das Online-Spiel ist noch nicht fertig. Diese Version testet die Verbindung zwischen euren Spielen."
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Name hat eine andere Version der Mod. Deine: $Mine. Andere: $Theirs."
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "$Name hat die Lobby verlassen."
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "Verbindung zu $Name verloren: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "Die Verbindung zur Lobby wurde getrennt."
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "Beitritt zur Lobby fehlgeschlagen: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "Lobby konnte nicht erstellt werden: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "$Name hat dich eingeladen, aber du bist bereits in einer Lobby. Verlasse sie zuerst."
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "Steam-AppID: $AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "Die Mod hat AppID $Expected erwartet. Beide Spieler brauchen dieselbe AppID, siehe README."
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "Online-Spiel erstellen"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "Freund einladen"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "Lobby verlassen"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "Abbrechen"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "Aktualisieren"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "Erneut versuchen"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "$Name beitreten"
                 }
             ]
         },
@@ -177,6 +525,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "Jugador $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "Cooperativo en línea"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "Steam no está disponible: $Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "Crea una partida e invita a un amigo desde la interfaz de Steam (Mayús+Tab). Para unirte a un amigo, acepta su invitación en Steam o elígelo abajo."
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "Amigos con partida abierta: $Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "Creando sala..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "Uniéndose a la sala..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "Tu sala está abierta. Invita a un amigo desde la interfaz de Steam. Tus amigos también pueden unirse desde su menú de cooperativo en línea o su lista de amigos de Steam. Si sales de esta pantalla, la sala se cerrará."
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "La interfaz de Steam no está disponible en este juego. Tu amigo puede unirse desde su menú de cooperativo en línea."
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "Conectando con $Name..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "Conectado con $Name. Ping: $Ping ms."
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "Canal de datos del juego: funciona."
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "Canal de datos del juego: esperando a $Name..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "El juego en línea aún no está listo. Esta versión prueba la conexión entre vuestros juegos."
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Name tiene otra versión del mod. La tuya: $Mine. La suya: $Theirs."
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "$Name ha salido de la sala."
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "Se perdió la conexión con $Name: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "Te has desconectado de la sala."
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "No se pudo unir a la sala: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "No se pudo crear la sala: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "$Name te ha invitado, pero ya estás en una sala. Sal de ella primero."
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "AppID de Steam: $AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "El mod esperaba el AppID $Expected. Ambos jugadores necesitan el mismo AppID, consulta el README."
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "Crear partida en línea"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "Invitar a un amigo"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "Salir de la sala"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "Cancelar"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "Actualizar"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "Reintentar"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "Unirse a $Name"
                 }
             ]
         },
@@ -222,6 +686,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "Joueur $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "Coop en ligne"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "Steam n'est pas disponible : $Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "Créez une partie, puis invitez un ami via l'overlay Steam (Maj+Tab). Pour rejoindre un ami, acceptez son invitation dans Steam ou choisissez-le ci-dessous."
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "Amis qui hébergent : $Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "Création du salon..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "Connexion au salon..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "Votre salon est ouvert. Invitez un ami via l'overlay Steam. Vos amis peuvent aussi vous rejoindre depuis leur menu Coop en ligne ou leur liste d'amis Steam. Quitter cet écran ferme le salon."
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "L'overlay Steam n'est pas disponible dans ce jeu. Votre ami peut quand même vous rejoindre depuis son menu Coop en ligne."
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "Connexion à $Name..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "Connecté à $Name. Ping : $Ping ms."
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "Canal de données de jeu : fonctionnel."
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "Canal de données de jeu : en attente de $Name..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "Le jeu en ligne n'est pas encore prêt. Cette version teste la connexion entre vos jeux."
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Name a une autre version du mod. La vôtre : $Mine. La sienne : $Theirs."
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "$Name a quitté le salon."
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "Connexion perdue avec $Name : $Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "Vous avez été déconnecté du salon."
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "Impossible de rejoindre le salon : $Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "Impossible de créer un salon : $Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "$Name vous a invité, mais vous êtes déjà dans un salon. Quittez-le d'abord."
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "AppID Steam : $AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "Le mod attendait l'AppID $Expected. Les deux joueurs doivent utiliser le même AppID, voir le README."
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "Héberger une partie en ligne"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "Inviter un ami"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "Quitter le salon"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "Annuler"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "Actualiser"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "Réessayer"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "Rejoindre $Name"
                 }
             ]
         },
@@ -267,6 +847,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "Giocatore $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "Cooperativa online"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "Steam non è disponibile: $Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "Crea una partita e invita un amico tramite l'overlay di Steam (Maiusc+Tab). Per unirti a un amico, accetta il suo invito su Steam o sceglilo qui sotto."
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "Amici che ospitano: $Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "Creazione della lobby..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "Accesso alla lobby..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "La tua lobby è aperta. Invita un amico tramite l'overlay di Steam. Gli amici possono unirsi anche dal loro menu Cooperativa online o dalla lista amici di Steam. Uscire da questa schermata chiude la lobby."
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "L'overlay di Steam non è disponibile in questo gioco. Il tuo amico può comunque unirsi dal suo menu Cooperativa online."
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "Connessione a $Name..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "Connesso a $Name. Ping: $Ping ms."
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "Canale dati di gioco: funzionante."
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "Canale dati di gioco: in attesa di $Name..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "Il gioco online non è ancora pronto. Questa versione verifica la connessione tra i vostri giochi."
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Name ha una versione diversa della mod. La tua: $Mine. La sua: $Theirs."
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "$Name ha lasciato la lobby."
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "Connessione con $Name persa: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "Sei stato disconnesso dalla lobby."
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "Impossibile unirsi alla lobby: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "Impossibile creare una lobby: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "$Name ti ha invitato, ma sei già in una lobby. Esci prima da quella."
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "AppID di Steam: $AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "La mod si aspettava l'AppID $Expected. Entrambi i giocatori devono usare lo stesso AppID, vedi il README."
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "Ospita una partita online"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "Invita un amico"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "Lascia la lobby"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "Annulla"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "Aggiorna"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "Riprova"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "Unisciti a $Name"
                 }
             ]
         },
@@ -312,6 +1008,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "Gracz $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "Kooperacja online"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "Steam jest niedostępny: $Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "Utwórz grę i zaproś znajomego przez nakładkę Steam (Shift+Tab). Aby dołączyć do znajomego, przyjmij jego zaproszenie w Steam lub wybierz go poniżej."
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "Znajomi z otwartą grą: $Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "Tworzenie lobby..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "Dołączanie do lobby..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "Twoje lobby jest otwarte. Zaproś znajomego przez nakładkę Steam. Znajomi mogą też dołączyć z menu Kooperacja online lub z listy znajomych Steam. Opuszczenie tego ekranu zamknie lobby."
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "Nakładka Steam jest niedostępna w tej grze. Znajomy nadal może dołączyć ze swojego menu Kooperacja online."
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "Łączenie z $Name..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "Połączono z $Name. Ping: $Ping ms."
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "Kanał danych gry: działa."
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "Kanał danych gry: oczekiwanie na $Name..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "Gra online nie jest jeszcze gotowa. Ta wersja testuje połączenie między waszymi grami."
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Name ma inną wersję moda. Twoja: $Mine. Znajomego: $Theirs."
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "Gracz $Name opuścił lobby."
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "Utracono połączenie z $Name: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "Rozłączono z lobby."
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "Nie udało się dołączyć do lobby: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "Nie udało się utworzyć lobby: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "Gracz $Name zaprosił cię, ale jesteś już w lobby. Najpierw je opuść."
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "AppID Steam: $AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "Mod oczekiwał AppID $Expected. Obaj gracze potrzebują tego samego AppID, zobacz README."
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "Utwórz grę online"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "Zaproś znajomego"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "Opuść lobby"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "Anuluj"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "Odśwież"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "Ponów"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "Dołącz do $Name"
                 }
             ]
         },
@@ -357,6 +1169,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "Jogador $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "Cooperativo online"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "A Steam não está disponível: $Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "Crie uma partida e convide um amigo pela sobreposição da Steam (Shift+Tab). Para entrar na partida de um amigo, aceite o convite na Steam ou escolha-o abaixo."
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "Amigos hospedando: $Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "Criando sala..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "Entrando na sala..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "Sua sala está aberta. Convide um amigo pela sobreposição da Steam. Amigos também podem entrar pelo menu Cooperativo online ou pela lista de amigos da Steam. Sair desta tela fecha a sala."
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "A sobreposição da Steam não está disponível neste jogo. Seu amigo ainda pode entrar pelo menu Cooperativo online dele."
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "Conectando a $Name..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "Conectado a $Name. Ping: $Ping ms."
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "Canal de dados do jogo: funcionando."
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "Canal de dados do jogo: aguardando $Name..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "O jogo online ainda não está pronto. Esta versão testa a conexão entre os seus jogos."
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Name tem outra versão do mod. A sua: $Mine. A do amigo: $Theirs."
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "$Name saiu da sala."
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "Conexão com $Name perdida: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "Você foi desconectado da sala."
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "Não foi possível entrar na sala: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "Não foi possível criar uma sala: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "$Name convidou você, mas você já está em uma sala. Saia dela primeiro."
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "AppID da Steam: $AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "O mod esperava o AppID $Expected. Os dois jogadores precisam do mesmo AppID, veja o README."
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "Hospedar partida online"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "Convidar um amigo"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "Sair da sala"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "Cancelar"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "Atualizar"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "Tentar novamente"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "Entrar com $Name"
                 }
             ]
         },
@@ -402,6 +1330,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "プレイヤー $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "オンライン協力プレイ"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "Steamを利用できません: $Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "ゲームを作成し、Steamオーバーレイ（Shift+Tab）からフレンドを招待してください。フレンドのゲームに参加するには、Steamで招待を承諾するか、下から選択してください。"
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "ホスト中のフレンド: $Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "ロビーを作成中..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "ロビーに参加中..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "ロビーを開きました。Steamオーバーレイからフレンドを招待してください。フレンドはオンライン協力プレイのメニューやSteamのフレンドリストからも参加できます。この画面を閉じるとロビーも閉じます。"
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "このゲームではSteamオーバーレイを利用できません。フレンドはオンライン協力プレイのメニューから参加できます。"
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "$Nameに接続中..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "$Nameに接続しました。Ping: $Ping ms"
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "ゲームデータ通信: 正常"
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "ゲームデータ通信: $Nameを待っています..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "オンラインプレイはまだ準備中です。このバージョンでは、お互いのゲーム間の接続をテストします。"
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Nameのモッドのバージョンが異なります。あなた: $Mine、相手: $Theirs"
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "$Nameがロビーから退出しました。"
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "$Nameとの接続が切れました: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "ロビーから切断されました。"
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "ロビーに参加できませんでした: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "ロビーを作成できませんでした: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "$Nameから招待されましたが、すでにロビーにいます。先に退出してください。"
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "Steam AppID: $AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "モッドはAppID $Expectedを想定しています。両方のプレイヤーが同じAppIDを使う必要があります。READMEを参照してください。"
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "オンラインゲームを作成"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "フレンドを招待"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "ロビーから退出"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "キャンセル"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "更新"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "再試行"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "$Nameに参加"
                 }
             ]
         },
@@ -447,6 +1491,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "玩家 $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "在线合作"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "Steam 不可用：$Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "创建游戏，然后通过 Steam 界面（Shift+Tab）邀请好友。要加入好友的游戏，请在 Steam 中接受邀请，或在下方选择好友。"
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "正在主持游戏的好友：$Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "正在创建大厅..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "正在加入大厅..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "大厅已开启。请通过 Steam 界面邀请好友。好友也可以从在线合作菜单或 Steam 好友列表加入。离开此界面将关闭大厅。"
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "此游戏中无法使用 Steam 界面。好友仍可以从在线合作菜单加入。"
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "正在连接 $Name..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "已连接到 $Name。延迟：$Ping 毫秒。"
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "游戏数据通道：正常。"
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "游戏数据通道：正在等待 $Name..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "在线游戏尚未完成。此版本用于测试双方游戏之间的连接。"
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Name 的模组版本不同。你的版本：$Mine。对方的版本：$Theirs。"
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "$Name 已离开大厅。"
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "与 $Name 的连接已断开：$Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "你已与大厅断开连接。"
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "无法加入大厅：$Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "无法创建大厅：$Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "$Name 邀请了你，但你已在大厅中。请先离开当前大厅。"
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "Steam AppID：$AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "模组需要的 AppID 为 $Expected。双方玩家必须使用相同的 AppID，请参阅 README。"
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "创建在线游戏"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "邀请好友"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "离开大厅"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "取消"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "刷新"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "重试"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "加入 $Name"
                 }
             ]
         },
@@ -492,6 +1652,122 @@
                 {
                     Id = "CoopMenu_PlayerController"
                     DisplayName = "플레이어 $PlayerIndex: $Controller"
+                },
+                {
+                    Id = "OnlineMenu_Header"
+                    DisplayName = "온라인 협동"
+                },
+                {
+                    Id = "OnlineMenu_SteamUnavailable"
+                    DisplayName = "Steam을 사용할 수 없습니다: $Error"
+                },
+                {
+                    Id = "OnlineMenu_Idle"
+                    DisplayName = "게임을 만든 뒤 Steam 오버레이(Shift+Tab)로 친구를 초대하세요. 친구의 게임에 참가하려면 Steam에서 초대를 수락하거나 아래에서 친구를 선택하세요."
+                },
+                {
+                    Id = "OnlineMenu_FriendsHosting"
+                    DisplayName = "게임을 연 친구: $Names"
+                },
+                {
+                    Id = "OnlineMenu_Creating"
+                    DisplayName = "로비를 만드는 중..."
+                },
+                {
+                    Id = "OnlineMenu_Joining"
+                    DisplayName = "로비에 참가하는 중..."
+                },
+                {
+                    Id = "OnlineMenu_Waiting"
+                    DisplayName = "로비가 열렸습니다. Steam 오버레이로 친구를 초대하세요. 친구는 온라인 협동 메뉴나 Steam 친구 목록에서도 참가할 수 있습니다. 이 화면을 나가면 로비가 닫힙니다."
+                },
+                {
+                    Id = "OnlineMenu_NoOverlay"
+                    DisplayName = "이 게임에서는 Steam 오버레이를 사용할 수 없습니다. 친구는 온라인 협동 메뉴에서 참가할 수 있습니다."
+                },
+                {
+                    Id = "OnlineMenu_Connecting"
+                    DisplayName = "$Name 님에게 연결하는 중..."
+                },
+                {
+                    Id = "OnlineMenu_Connected"
+                    DisplayName = "$Name 님과 연결되었습니다. 핑: $Ping ms"
+                },
+                {
+                    Id = "OnlineMenu_ChannelOk"
+                    DisplayName = "게임 데이터 채널: 정상"
+                },
+                {
+                    Id = "OnlineMenu_ChannelWaiting"
+                    DisplayName = "게임 데이터 채널: $Name 님을 기다리는 중..."
+                },
+                {
+                    Id = "OnlineMenu_NotPlayableYet"
+                    DisplayName = "온라인 플레이는 아직 준비되지 않았습니다. 이 버전은 서로의 게임 간 연결을 테스트합니다."
+                },
+                {
+                    Id = "OnlineMenu_VersionMismatch"
+                    DisplayName = "$Name 님의 모드 버전이 다릅니다. 내 버전: $Mine, 상대 버전: $Theirs"
+                },
+                {
+                    Id = "OnlineMenu_PeerLeft"
+                    DisplayName = "$Name 님이 로비를 나갔습니다."
+                },
+                {
+                    Id = "OnlineMenu_ConnectionLost"
+                    DisplayName = "$Name 님과의 연결이 끊어졌습니다: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_Disconnected"
+                    DisplayName = "로비와의 연결이 끊어졌습니다."
+                },
+                {
+                    Id = "OnlineMenu_JoinFailed"
+                    DisplayName = "로비에 참가할 수 없습니다: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_HostFailed"
+                    DisplayName = "로비를 만들 수 없습니다: $Reason"
+                },
+                {
+                    Id = "OnlineMenu_InviteIgnored"
+                    DisplayName = "$Name 님이 초대했지만 이미 로비에 있습니다. 먼저 로비를 나가세요."
+                },
+                {
+                    Id = "OnlineMenu_AppId"
+                    DisplayName = "Steam AppID: $AppId"
+                },
+                {
+                    Id = "OnlineMenu_AppIdMismatch"
+                    DisplayName = "모드가 예상한 AppID는 $Expected입니다. 두 플레이어 모두 같은 AppID를 사용해야 합니다. README를 참고하세요."
+                },
+                {
+                    Id = "OnlineMenu_Host"
+                    DisplayName = "온라인 게임 만들기"
+                },
+                {
+                    Id = "OnlineMenu_Invite"
+                    DisplayName = "친구 초대"
+                },
+                {
+                    Id = "OnlineMenu_Leave"
+                    DisplayName = "로비 나가기"
+                },
+                {
+                    Id = "OnlineMenu_Cancel"
+                    DisplayName = "취소"
+                },
+                {
+                    Id = "OnlineMenu_Refresh"
+                    DisplayName = "새로고침"
+                },
+                {
+                    Id = "OnlineMenu_Retry"
+                    DisplayName = "다시 시도"
+                },
+                {
+                    Id = "OnlineMenu_JoinFriend"
+                    DisplayName = "$Name 님에게 참가"
                 }
             ]
         }

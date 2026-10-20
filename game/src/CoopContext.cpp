@@ -8,6 +8,7 @@
 #include "CoopContext.h"
 
 #include "extensions/LuaFunctionDefs.h"
+#include "extensions/LuaOnlineFunctionDefs.h"
 #include "interface/PlayerManager.h"
 #include "interface/PlayerUnit.h"
 #include "interface/UnitManager.h"
@@ -21,6 +22,7 @@ CoopContext::CoopContext() {}
 void CoopContext::InitLua(lua_State *luaState) {
     // Init coop engine lua functions
     LuaFunctionDefs::Load(luaState);
+    LuaOnlineFunctionDefs::Load(luaState);
 }
 
 size_t CoopContext::CreatePlayer() {
