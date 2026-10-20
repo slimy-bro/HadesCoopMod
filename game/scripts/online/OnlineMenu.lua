@@ -333,9 +333,12 @@ end)
 
 -- Connect to Steam once the main menu is up. Steam invites work without opening the Online Coop menu then,
 -- and a game started by an invite joins the lobby.
-OnMenuOpened {
-    "MainMenuScreen",
-    function()
-        CoopOnline.Init()
-    end
-}
+-- The mod loads before the game defines OnMenuOpened when the game starts, the Online Coop menu connects then.
+if OnMenuOpened then
+    OnMenuOpened {
+        "MainMenuScreen",
+        function()
+            CoopOnline.Init()
+        end
+    }
+end

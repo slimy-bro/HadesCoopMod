@@ -75,8 +75,8 @@ on the next launch and notes it in the log.
 
 ## Invites
 
-The mod connects to Steam when the main menu opens, so you can accept an invite from anywhere in the game.
-The game joins the lobby, open the Online Coop menu to see the connection.
+Open the Online Coop menu once before you accept an invite, the mod connects to Steam there.
+After that you can accept invites from anywhere in the game.
 
 Start the game before you accept an invite. If the game is closed, Steam starts its own Spacewar game for the invite.
 
