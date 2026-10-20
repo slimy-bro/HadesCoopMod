@@ -4,9 +4,9 @@
 
 // Starts Hades as Steam's Spacewar (AppID 480).
 //
-// Set it as the launch option of Spacewar in Steam:
-//   "C:\...\HadesCoopLauncher.exe" %command%
-// Steam then starts Hades whenever Spacewar starts, including when a friend's invite starts it.
+// Start it directly, from a desktop shortcut, or as a non-Steam game in Steam.
+// It starts Steam if needed and then the game, which connects to Steam as Spacewar.
+// Steam never starts the Hades entry of the library, so it only shows Spacewar.
 //
 // Options:
 //   --game "C:\...\Hades.exe"  game to start, found next to the mod folder by default
@@ -21,6 +21,10 @@
 
 static const wchar_t *TITLE = L"Hades coop launcher";
 static const wchar_t *SPACEWAR_APP_ID = L"480";
+
+// How long to wait for Steam to log in after starting it
+static const DWORD STEAM_START_TIMEOUT_MS = 90000;
+static const DWORD STEAM_POLL_INTERVAL_MS = 500;
 
 static void ShowError(const std::wstring &message) {
     MessageBoxW(nullptr, message.c_str(), TITLE, MB_OK | MB_ICONERROR);
@@ -63,6 +67,34 @@ static std::wstring FindGame(std::wstring directory, bool preferVulkan) {
     return L"";
 }
 
+enum class SteamState { Unknown, LoggedOut, LoggedIn };
+
+// Steam keeps the logged in account in the registry while it runs
+static SteamState GetSteamState() {
+    DWORD activeUser = 0;
+    DWORD size = sizeof(activeUser);
+    LSTATUS status = RegGetValueW(HKEY_CURRENT_USER, L"Software\\Valve\\Steam\\ActiveProcess", L"ActiveUser",
+                                  RRF_RT_REG_DWORD, nullptr, &activeUser, &size);
+    if (status != ERROR_SUCCESS)
+        return SteamState::Unknown;
+
+    return activeUser != 0 ? SteamState::LoggedIn : SteamState::LoggedOut;
+}
+
+// The game can only go online when Steam runs before it starts
+static void EnsureSteamRunning() {
+    if (GetSteamState() != SteamState::LoggedOut)
+        return;
+
+    ShellExecuteW(nullptr, L"open", L"steam://open/main", nullptr, nullptr, SW_SHOWNORMAL);
+
+    for (DWORD waited = 0; waited < STEAM_START_TIMEOUT_MS; waited += STEAM_POLL_INTERVAL_MS) {
+        if (GetSteamState() == SteamState::LoggedIn)
+            return;
+        Sleep(STEAM_POLL_INTERVAL_MS);
+    }
+}
+
 int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
     int argc = 0;
     LPWSTR *argv = CommandLineToArgvW(GetCommandLineW(), &argc);
@@ -75,7 +107,6 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
     bool preferVulkan = false;
     std::wstring connectLobby;
 
-    // Steam appends the Spacewar command after our options, only the lobby argument matters
     for (int i = 1; i < argc; i++) {
         std::wstring argument = argv[i];
         if (argument == L"--game" && i + 1 < argc) {
@@ -94,14 +125,21 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
     if (gamePath.empty() || !FileExists(gamePath)) {
         ShowError(L"Cannot find Hades.exe.\n\n"
                   L"Keep HadesCoopLauncher.exe in the mod folder inside the Hades folder, "
-                  L"or set the game path in the Spacewar launch options:\n\n"
-                  L"\"C:\\...\\HadesCoopLauncher.exe\" --game \"C:\\...\\Hades\\x64\\Hades.exe\" %command%");
+                  L"or pass the game path:\n\n"
+                  L"HadesCoopLauncher.exe --game \"C:\\...\\Hades\\x64\\Hades.exe\"");
         return 1;
     }
 
-    // The game reads the AppID when it connects to Steam. Steam sets it already when it starts Spacewar.
+    EnsureSteamRunning();
+
+    // The game connects to Steam as the app in these variables
     SetEnvironmentVariableW(L"SteamAppId", SPACEWAR_APP_ID);
     SetEnvironmentVariableW(L"SteamGameId", SPACEWAR_APP_ID);
+
+    // Steam's overlay for Vulkan is a layer that only loads with this variable.
+    // Steam sets it for programs it starts, set it for the Vulkan version started from elsewhere too.
+    if (!GetEnvironmentVariableW(L"ENABLE_VK_LAYER_VALVE_steam_overlay_1", nullptr, 0))
+        SetEnvironmentVariableW(L"ENABLE_VK_LAYER_VALVE_steam_overlay_1", L"1");
 
     std::wstring commandLine = L"\"" + gamePath + L"\"";
     if (!connectLobby.empty())
@@ -119,7 +157,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
         return 1;
     }
 
-    // Steam shows Spacewar as running while the launcher runs
+    // When Steam started the launcher as a non-Steam game, it shows it as running while the game runs
     WaitForSingleObject(processInfo.hProcess, INFINITE);
 
     DWORD exitCode = 0;

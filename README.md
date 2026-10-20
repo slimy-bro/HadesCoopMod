@@ -41,20 +41,16 @@ The Online Coop menu shows the AppID in use. Both players need the same AppID.
 
 ### Start Hades as Spacewar (recommended)
 
-`HadesCoopLauncher.exe` in the mod folder makes Steam start Hades whenever Spacewar starts.
-Steam then runs the game as Spacewar from the start, and accepting an invite starts Hades instead of Spacewar.
-Set it up once:
+Start the game with `HadesCoopLauncher.exe` from the mod folder, for example through a desktop shortcut.
+It starts Steam if it isn't running, then starts Hades as Spacewar.
+Steam only sees Spacewar, it doesn't start the Hades entry of your library at all.
+Spacewar doesn't have to be installed.
 
-1. Add Spacewar to your library: open `steam://install/480` in a browser or in the Windows Run dialog (Win+R).
-   It is free and small. Its own game never runs.
-2. In Steam, right click Spacewar -> *Properties* -> *General* -> *Launch Options*, and enter
-   the full path of `HadesCoopLauncher.exe` in your mod folder followed by `%command%`, for example:
-   ```
-   "C:\Program Files (x86)\Steam\steamapps\common\Hades\Content\Mods\TN_CoopMod\HadesCoopLauncher.exe" %command%
-   ```
-   Add `--vulkan` before `%command%` to start the Vulkan version of the game.
-   If the launcher isn't inside the Hades folder, add `--game "C:\...\Hades\x64\Hades.exe"` before `%command%`.
-3. Press *Play* on Spacewar to start Hades with the mod.
+- Add `--vulkan` to the shortcut target to start the Vulkan version of the game.
+- If the launcher isn't inside the Hades folder, add `--game "C:\...\Hades\x64\Hades.exe"`.
+- If the Steam overlay doesn't show up, add the launcher to Steam as a non-Steam game
+  (*Games* -> *Add a Non-Steam Game to My Library*) and start it from there.
+  Steam only shows its overlay reliably in programs it starts itself.
 
 ### Without the launcher
 
@@ -74,16 +70,15 @@ on the next launch and notes it in the log.
 - Both players use the same version of the mod, and Steam is running with them logged in.
 - Epic Games Store version: copy `steam_api64.dll` next to `HadesCoopGame.dll`.
   It ships with the [Steamworks SDK](https://partner.steamgames.com/downloads/list) (`redistributable_bin/win64`)
-  and with many Steam games. Start the game with the launcher, otherwise the Steam overlay may not work.
-  Your friend can also join you from their Online Coop menu or their Steam friends list.
+  and with many Steam games. Start the game with the launcher. For the Steam overlay, add the launcher to Steam
+  as a non-Steam game. Your friend can also join you from their Online Coop menu or their Steam friends list.
 
 ## Invites
 
 The mod connects to Steam when the main menu opens, so you can accept an invite from anywhere in the game.
 The game joins the lobby, open the Online Coop menu to see the connection.
 
-With the launcher, accepting an invite while the game is closed starts Hades and joins the lobby.
-Without it, start Hades first, otherwise Steam starts Spacewar.
+Start the game before you accept an invite. If the game is closed, Steam starts its own Spacewar game for the invite.
 
 ## Troubleshooting
 
